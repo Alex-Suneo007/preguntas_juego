@@ -9,6 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego de Preguntas</title>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="js/main.js"></script>
 </head>
 <body>
     <h1>Bienvenido al Juego de Preguntas</h1>
