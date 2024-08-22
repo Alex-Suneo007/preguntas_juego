@@ -18,20 +18,7 @@ if (isset($_SESSION['usuario_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - Juego de Preguntas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <style>
-        .hero-section {
-            background: url('images/hero-bg.jpg') no-repeat center center;
-            background-size: cover;
-            color: white;
-            padding: 100px 0;
-        }
-        .hero-section h1 {
-            font-size: 3rem;
-        }
-        .card-deck .card {
-            margin-bottom: 1.5rem;
-        }
-    </style>
+    <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
     <header class="bg-primary text-white p-3 mb-4">
@@ -71,7 +58,7 @@ if (isset($_SESSION['usuario_id'])) {
     </header>
 
     <main>
-        <section class="hero-section text-center">
+        <section class="hero-section">
             <div class="container">
                 <h1>¡Pon a prueba tus conocimientos!</h1>
                 <p class="lead">Únete a nuestro juego de preguntas y desafía tu mente.</p>
@@ -112,12 +99,12 @@ if (isset($_SESSION['usuario_id'])) {
         </section>
     </main>
 
-    <footer class="bg-dark text-white text-center p-4">
+    <footer>
         <div class="container">
             <p>&copy; <?php echo date('Y'); ?> Juego de Preguntas. Todos los derechos reservados.</p>
-            <a href="index.php" class="text-light">Inicio</a> | 
-            <a href="login/login.php" class="text-light">Iniciar sesión</a> | 
-            <a href="registro/index.php" class="text-light">Registrarse</a>
+            <a href="index.php">Inicio</a> | 
+            <a href="login/login.php">Iniciar sesión</a> | 
+            <a href="registro/index.php">Registrarse</a>
         </div>
     </footer>
 
