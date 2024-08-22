@@ -1,22 +1,14 @@
 <?php
-session_start();
-include('../includes/db.php');
-include('../includes/funciones.php');
+include_once('../includes/funciones.php');
 
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $correo = $_POST['correo'];
-    $contrasena = $_POST['contrasena'];
+    $correo = $_POST['correo'] ?? '';
+    $contrasena = $_POST['contrasena'] ?? '';
 
-    $stmt = $pdo->prepare("SELECT id, contrasena FROM usuarios WHERE correo = ?");
-    $stmt->execute([$correo]);
-    $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($usuario && password_verify($contrasena, $usuario['contrasena'])) {
-        $_SESSION['usuario_id'] = $usuario['id'];
-        
-        if (verificarAdmin()) {
+    if (verificarUsuario($correo, $contrasena)) {
+        if (esAdmin()) {
             header('Location: ../admin/index.php');
         } else {
             header('Location: ../jugador/index.php');
@@ -34,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar sesión - Juego de Preguntas</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="../css/styles.css" rel="stylesheet">
 </head>
 <body>
@@ -42,11 +34,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <nav class="navbar navbar-expand-lg navbar-dark">
             <div class="container">
                 <a class="navbar-brand" href="../index.php">Juego de Preguntas</a>
-                <!-- ... otras partes del navbar ... -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../index.php">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php">Iniciar sesión</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../registro/index.php">Registrarse</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
-    
+
     <main>
         <section class="hero-section">
             <div class="container">
@@ -82,8 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <footer>
         <div class="container">
-            <p class="mb-0">Desarrollado por Alex 👻</p>
+            <p class="text-center">&copy; <?php echo date("Y"); ?> Juego de Preguntas</p>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9fMWfMTh9HfPz72P7AXzmL3lTVZlGo6jF2w0hb8MY4u1Zx7Qp5Jb" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-fQ9g6e5C9iRtgiQnE6I4f6v8Gv5tq5N11brM4TO5AhYXocVZHpN6T6xD0I8jzjOWp" crossorigin="anonymous"></script>
 </body>
 </html>

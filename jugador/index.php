@@ -1,17 +1,26 @@
 <?php
-// Incluye el archivo de configuración y funciones
+session_start();
 include('../includes/db.php');
 include('../includes/funciones.php');
 
-// Inicia la sesión
-session_start();
+if (!verificarAutenticacion()) {
+    header('Location: ../login/index.php');
+    exit();
+}
 
-// Verifica si el usuario está autenticado
-verificarAutenticacion();
-
-// Obtiene el nombre del usuario
 $usuario_id = $_SESSION['usuario_id'];
-$nombre_usuario = obtenerNombreUsuario($usuario_id);
+$nombre_usuario = '';
+
+$stmt = $pdo->prepare("SELECT nombre FROM usuarios WHERE id = ?");
+$stmt->execute([$usuario_id]);
+$usuario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($usuario) {
+    $nombre_usuario = htmlspecialchars($usuario['nombre']);
+} else {
+    // Manejo de errores si el usuario no se encuentra
+    $nombre_usuario = 'Usuario desconocido';
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,30 +29,35 @@ $nombre_usuario = obtenerNombreUsuario($usuario_id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - Juego de Preguntas</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>Bienvenido, <?php echo htmlspecialchars($nombre_usuario); ?>!</h1>
-        <nav>
-            <ul>
-                <li><a href="jugar.php">Comenzar Juego</a></li>
-                <li><a href="resultado.php">Ver Resultados</a></li>
-                <li><a href="../logout.php">Cerrar sesión</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="../index.php">Juego de Preguntas</a>
+                <!-- ... otras partes del navbar ... -->
+                <form method="post" action="../logout.php" class="d-inline">
+                    <button type="submit" class="btn btn-light">Cerrar sesión</button>
+                </form>
+            </div>
         </nav>
     </header>
-
+    
     <main>
-        <section>
-            <h2>Información del Juego</h2>
-            <p>En este juego, puedes responder preguntas y ver tus resultados.</p>
-            <p>Utiliza los enlaces de arriba para comenzar a jugar o ver tus resultados.</p>
+        <section class="hero-section">
+            <div class="container">
+                <h1>Bienvenido, <?php echo $nombre_usuario; ?>!</h1>
+                <!-- Contenido del juego aquí -->
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; <?php echo date('Y'); ?> Juego de Preguntas. Todos los derechos reservados.</p>
+        <div class="container">
+            <p class="mb-0">Desarrollado por Alex 👻</p>
+        </div>
     </footer>
 </body>
 </html>

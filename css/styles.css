@@ -2,9 +2,10 @@
 body {
     margin: 0;
     padding: 0;
-    color: #fff; /* Cambiado a blanco para mejor contraste con fondo oscuro */
+    color: #fff; /* Color blanco para el texto */
     font-family: 'Arial', sans-serif;
     overflow-x: hidden; /* Evitar desplazamiento horizontal no deseado */
+    background-color: #f8f9fa; /* Color de fondo general */
 }
 
 .hero-section {
@@ -19,6 +20,57 @@ body {
     justify-content: center;
 }
 
+/* Encabezado */
+header {
+    background: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente para integrar con la imagen de fondo */
+    padding: 1rem 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Asegúrate de que el encabezado esté sobre el contenido */
+    border-bottom: none; /* Elimina el borde inferior del encabezado */
+}
+
+.navbar {
+    margin-bottom: 0;
+    background-color: transparent; /* Fondo transparente para la barra de navegación */
+    padding: 0;
+    border-bottom: none; /* Elimina el borde inferior de la barra de navegación */
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: #ff5722; /* Color de la marca en la barra de navegación */
+    text-decoration: none; /* Asegura que el subrayado no esté presente */
+}
+
+.navbar-brand:hover {
+    color: #e64a19; /* Color de la marca al pasar el ratón */
+}
+
+.nav-link {
+    font-size: 1rem;
+    color: #fff; /* Color de los enlaces de navegación */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    border: none; /* Elimina cualquier borde aplicado por defecto */
+}
+
+.nav-link:hover {
+    color: #ff5722; /* Color de los enlaces al pasar el ratón */
+}
+
+.nav-link.active {
+    color: #ff5722; /* Color para el enlace activo */
+}
+
+.navbar-light .navbar-nav .nav-link.active,
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover {
+    border-bottom: none; /* Elimina el borde inferior en los estados activos y hover de los enlaces */
+}
+
+/* Sección hero */
 .hero-section h1 {
     font-size: 3rem;
     font-weight: bold;
@@ -45,10 +97,13 @@ body {
     border-color: #e64a19;
 }
 
+/* Tarjetas */
 .card {
     border: none;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente para las tarjetas */
+    color: #fff; /* Color blanco para el texto en las tarjetas */
 }
 
 .card-img-top {
@@ -61,6 +116,15 @@ body {
     color: #fff;
 }
 
+.card-title {
+    color: #ff5722; /* Color para los títulos de las tarjetas */
+}
+
+.card-text {
+    color: #ddd; /* Color para el texto en las tarjetas */
+}
+
+/* Pie de página */
 footer {
     background-color: #222; /* Color oscuro para el pie de página */
     color: #ddd; /* Color claro para el texto en el pie de página */
@@ -74,28 +138,4 @@ footer a {
 
 footer a:hover {
     color: #e64a19; /* Color de enlaces al pasar el ratón */
-}
-
-/* Ajustes para el header y la navegación */
-.navbar {
-    margin-bottom: 1rem;
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro para la barra de navegación */
-}
-
-.navbar-brand {
-    font-size: 1.5rem;
-    color: #ff5722; /* Color de la marca en la barra de navegación */
-}
-
-.navbar-brand:hover {
-    color: #e64a19; /* Color de la marca al pasar el ratón */
-}
-
-.nav-link {
-    font-size: 1rem;
-    color: #fff; /* Color de los enlaces de navegación */
-}
-
-.nav-link:hover {
-    color: #ff5722; /* Color de los enlaces al pasar el ratón */
 }
