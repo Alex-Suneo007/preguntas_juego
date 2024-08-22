@@ -18,6 +18,20 @@ if (isset($_SESSION['usuario_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - Juego de Preguntas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .hero-section {
+            background: url('images/hero-bg.jpg') no-repeat center center;
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+        }
+        .hero-section h1 {
+            font-size: 3rem;
+        }
+        .card-deck .card {
+            margin-bottom: 1.5rem;
+        }
+    </style>
 </head>
 <body>
     <header class="bg-primary text-white p-3 mb-4">
@@ -56,20 +70,55 @@ if (isset($_SESSION['usuario_id'])) {
         </div>
     </header>
 
-    <main class="container">
-        <section class="my-4">
-            <h2 class="h4">Descripción del Juego</h2>
-            <p>Este es un juego de preguntas donde puedes probar tus conocimientos y ver cómo te comparas con otros jugadores.</p>
-            <?php if ($usuario_autenticado): ?>
-                <p>Hola, <?php echo htmlspecialchars($nombre_usuario); ?>. ¡Gracias por volver!</p>
-            <?php else: ?>
-                <p>¡Regístrate y comienza a jugar!</p>
-            <?php endif; ?>
+    <main>
+        <section class="hero-section text-center">
+            <div class="container">
+                <h1>¡Pon a prueba tus conocimientos!</h1>
+                <p class="lead">Únete a nuestro juego de preguntas y desafía tu mente.</p>
+                <a href="<?php echo $usuario_autenticado ? 'jugador/index.php' : 'login/login.php'; ?>" class="btn btn-light btn-lg mt-3"><?php echo $usuario_autenticado ? 'Comenzar a Jugar' : 'Iniciar sesión'; ?></a>
+            </div>
+        </section>
+
+        <section class="container my-5">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="images/feature1.jpg" class="card-img-top" alt="Características del juego">
+                        <div class="card-body">
+                            <h5 class="card-title">Características del Juego</h5>
+                            <p class="card-text">Disfruta de una amplia gama de preguntas y desafíos que te mantendrán entretenido.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="images/feature2.jpg" class="card-img-top" alt="Ranking de Jugadores">
+                        <div class="card-body">
+                            <h5 class="card-title">Ranking de Jugadores</h5>
+                            <p class="card-text">Compite con otros jugadores y muestra tus habilidades en el ranking.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="images/feature3.jpg" class="card-img-top" alt="Interfaz Amigable">
+                        <div class="card-body">
+                            <h5 class="card-title">Interfaz Amigable</h5>
+                            <p class="card-text">Una interfaz intuitiva que te permitirá jugar sin complicaciones.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer class="bg-dark text-white text-center p-3 mt-4">
-        <p>&copy; <?php echo date('Y'); ?> Juego de Preguntas. Todos los derechos reservados.</p>
+    <footer class="bg-dark text-white text-center p-4">
+        <div class="container">
+            <p>&copy; <?php echo date('Y'); ?> Juego de Preguntas. Todos los derechos reservados.</p>
+            <a href="index.php" class="text-light">Inicio</a> | 
+            <a href="login/login.php" class="text-light">Iniciar sesión</a> | 
+            <a href="registro/index.php" class="text-light">Registrarse</a>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
